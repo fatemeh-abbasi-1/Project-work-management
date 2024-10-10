@@ -3,19 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+@font-face {
+  font-family: Josefin_Sans;
+  src: url(font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
+}
 body {
   max-width: 2000px;
-  font-family: Arial, Helvetica, sans-serif;
-  /* background-color: rgb(244, 153, 108); */
-  background-color: rgb(241, 142, 112);
+  background-color: rgb(28, 28, 28);
+  font-family: Josefin_Sans;
+  /* background-color: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px); */
 }
 /* header */
 header {
   width: 100%;
 }
 .menu {
-  background-color: rgb(249, 217, 178);
+  background-color: rgb(28, 28, 28);
   height: 4.2rem;
+  padding-left: 3rem;
+  padding-top: 1.4rem;
 }
 /* main */
 .content {
@@ -37,56 +44,175 @@ header {
   text-align: center;
 }
 .todo-content {
-  background-color: rgb(252, 222, 186);
+  background-image: linear-gradient(
+    65.4deg,
+    rgba(56, 248, 249, 1) -9.1%,
+    rgba(213, 141, 240, 1) 48%,
+    rgba(249, 56, 152, 1) 111.1%
+  );
   height: 8rem;
   text-align: center;
   padding: 0.6rem;
   height: 26rem;
   border-radius: 1.2rem;
   margin-bottom: 8px;
+  padding: 0.8rem;
+  overflow-x: hidden;
+}
+.overflow {
+  overflow-y: scroll;
 }
 h1 {
   margin-bottom: 10px;
+  font-family: Josefin_Sans;
 }
 
 .doing-content {
-  background-color: bisque;
-  height: 8rem;
+  /* background-color: rgb(251, 202, 159); */
+  background-image: radial-gradient(
+    circle 918px at 13.1% 25.5%,
+    rgba(249, 107, 107, 1) 0%,
+    rgba(247, 231, 172, 1) 48.9%,
+    rgba(173, 247, 172, 1) 90%
+  );
+  height: 7rem;
   text-align: center;
   padding: 0.6rem;
   height: 37rem;
   border-radius: 1.2rem;
   margin-bottom: 8px;
+  padding: 0.8rem;
+  z-index: 1;
 }
 
 .done-content {
-  background-color: bisque;
+  background-image: linear-gradient(
+    65.4deg,
+    rgba(56, 248, 249, 1) -9.1%,
+    rgba(213, 141, 240, 1) 48%,
+    rgba(249, 56, 152, 1) 111.1%
+  );
   height: 8rem;
   text-align: center;
   padding: 0.6rem;
   height: 20rem;
   border-radius: 1.2rem;
   margin-bottom: 8px;
+  padding: 0.8rem;
 }
-/* .name-add {
-  display: flex;
-  justify-content: space-between;
-} */
+
 .name-work {
   font-size: 1.2rem;
+  color: blanchedalmond;
+  cursor: pointer;
 }
 /* modal */
 .modal {
-  width: 100%;
-  height: 25rem;
-  background-color: rgb(244, 136, 103);
-  /* background-color: rgb(213, 187, 237); */
+  width: 30%;
+  height: 24rem;
   z-index: 1;
-  box-shadow: 8px 9px 9px rgb(83, 80, 80);
+  background-color: rgb(60, 59, 59);
+  /* background-color: rgb(250, 245, 189); */
+  box-shadow: 0 20rem 5rem rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
-  /* backdrop-filter: blur(20px); */
   padding: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  color: aliceblue;
 }
 .hidden {
   display: none;
+}
+.transform {
+  position: absolute;
+  top: 12rem;
+  left: 33.5rem;
+  z-index: 2;
+  /* transform: translate(100); */
+}
+.typecard {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 4.5rem;
+}
+#type {
+  width: 50%;
+  height: 1.5rem;
+  font-size: 1rem;
+  font-family: Josefin_Sans;
+}
+.close {
+  display: block;
+  font-size: 1.5rem;
+  text-align: right;
+  margin-right: 2rem;
+}
+.title-text {
+  font-size: 1.2rem;
+  margin-right: 7rem;
+}
+#title-input {
+  width: 50%;
+  height: 2rem;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+.description-text {
+  font-size: 1.2rem;
+  margin-right: 3rem;
+}
+#description-input {
+  width: 50%;
+  height: 2rem;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+.dete-text {
+  font-size: 1.2rem;
+  margin-right: 4.2rem;
+}
+#date-input {
+  width: 50%;
+  height: 2rem;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 3px;
+}
+.info {
+  display: flex;
+  margin: 2rem;
+}
+.btn-create {
+  background-color: rgb(235, 123, 227);
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 2px 2px 2px rgb(63, 63, 63);
+}
+.curt-style {
+  width: 100%;
+  height: 10rem;
+  background-color: rgb(244, 237, 242);
+  padding: 1rem;
+  text-align: left;
+  font-size: 1.4rem;
+  border-radius: 1rem;
+  margin-bottom: 10px;
+}
+.dis-style {
+  margin-bottom: 1rem;
+}
+.date-style {
+  display: inline;
+  margin-right: 10rem;
+}
+.next--date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

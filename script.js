@@ -11,11 +11,12 @@ const title = document.getElementById("title-input");
 const description = document.getElementById("description-input");
 const time = document.getElementById("date-input");
 const moveToDoToDoing = document.querySelector(".next");
+const closeModal = document.querySelector(".close");
 
 /////
-const todo = [];
-const doing = [];
-const done = [];
+let todo = [];
+let doing = [];
+let done = [];
 
 /////////
 const html = function (arr) {
@@ -38,7 +39,14 @@ const html = function (arr) {
   dateCard.textContent = `⏰Due time :${arr.time}`;
   dateCard.classList.add("date-style");
   card.append(dateCard);
-  if (arr.type === "done") return;
+  if (arr.type === "doing") {
+    const next = document.createElement("a");
+    next.classList.add("next");
+    next.setAttribute("onclick", "moveDoing(event)");
+    next.textContent = "🔜";
+    card.append(next);
+  }
+  if (arr.type === "done" || arr.type === "doing") return;
   const next = document.createElement("a");
   next.classList.add("next");
   next.setAttribute("onclick", "moveToDo(event)");
@@ -46,13 +54,35 @@ const html = function (arr) {
   card.append(next);
 };
 // console.log(html);
-
+//recreate h1
+const createToDo = function () {
+  todoContainer.textContent = "";
+  const h1 = document.createElement("h1");
+  h1.textContent = "To Do";
+  todoContainer.append(h1);
+};
+const createDoing = function () {
+  doingContainer.textContent = "";
+  const h1 = document.createElement("h1");
+  h1.textContent = "Doing";
+  doingContainer.append(h1);
+};
+const createDone = function () {
+  doneContainer.textContent = "";
+  const h1 = document.createElement("h1");
+  h1.textContent = "Done";
+  doneContainer.append(h1);
+};
 //open modal
 openModal.addEventListener("click", function () {
   modal.classList.remove("hidden");
   modal.classList.add("transform");
 });
-
+//closeModal
+closeModal.addEventListener("click", function () {
+  modal.classList.add("hidden");
+  modal.classList.remove("transform");
+});
 //create card
 createCardBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -75,11 +105,7 @@ createCardBtn.addEventListener("click", function (e) {
     });
     console.log(todo);
     todo.length === 3 ? todoContainer.classList.add("overflow") : "";
-
-    todoContainer.textContent = "";
-    const h1 = document.createElement("h1");
-    h1.textContent = "To Do";
-    todoContainer.append(h1);
+    createToDo();
 
     title.value = description.value = " ";
     todo.forEach((e, i) => html(e));
@@ -96,11 +122,7 @@ createCardBtn.addEventListener("click", function (e) {
     });
     console.log(doing);
     doing.length === 4 ? doingContainer.classList.add("overflow") : "";
-    doingContainer.textContent = "";
-    doingContainer.textContent = "";
-    const h1 = document.createElement("h1");
-    h1.textContent = "Doing";
-    doingContainer.append(h1);
+    createDoing();
     title.value = description.value = " ";
     doing.forEach((e, i) => html(e));
     modal.classList.add("hidden");
@@ -124,25 +146,64 @@ createCardBtn.addEventListener("click", function (e) {
     modal.classList.add("hidden");
   }
 });
-
 //move from todo to doing
-// moveToDoToDoing.addEventListener("click", function (e) {
-//   console.log(e.target);
-// });
-function moveToDo(e) {
-  const getTitle = e.target
+function moveToDo(event) {
+  let getTitle = event.target
     .closest(".curt-style")
     .firstElementChild.innerHTML.slice(9);
   console.log(getTitle);
-  const findIndex = todo.findIndex((e) => e.title === getTitle);
-  console.log(findIndex);
+  const getDate = event.target
+    .closest(".curt-style")
+    .children[2].innerHTML.slice(11);
+  console.log(getDate);
+  const getDescription = event.target
+    .closest(".curt-style")
+    .children[1].innerHTML.slice(16);
+  console.log(getDescription);
+  const findItem = todo.filter((e) => e.title !== getTitle);
+  console.log(findItem);
+  todo = findItem;
+  createToDo();
+  findItem.forEach((e, i) => html(e));
+  doing.push({
+    title: getTitle,
+    description: getDescription,
+    time: getDate,
+    type: "doing",
+  });
+  console.log(doing);
+  createDoing();
 
-  todo.splice(todo[findIndex], 1);
-  console.log(todo);
-
-  // todoContainer.textContent = "";
-  // const h1 = document.createElement("h1");
-  // h1.textContent = "To Do";
-  // todoContainer.append(h1);
-  // todo.forEach((e, i) => html(e));
+  doing.forEach((e, i) => html(e));
+  doing.length === 4 ? doingContainer.classList.add("overflow") : "";
+}
+//move doing to done
+function moveDoing(event) {
+  let getTitle = event.target
+    .closest(".curt-style")
+    .firstElementChild.innerHTML.slice(9);
+  console.log(getTitle);
+  const getDate = event.target
+    .closest(".curt-style")
+    .children[2].innerHTML.slice(9);
+  console.log(getDate);
+  const getDescription = event.target
+    .closest(".curt-style")
+    .children[1].innerHTML.slice(14);
+  console.log(getDescription);
+  const findItem = doing.filter((e) => e.title !== getTitle);
+  console.log(findItem);
+  doing = findItem;
+  createDoing();
+  findItem.forEach((e, i) => html(e));
+  done.push({
+    title: getTitle,
+    description: getDescription,
+    time: getDate,
+    type: "done",
+  });
+  // console.log(done);
+  createDone();
+  done.forEach((e, i) => html(e));
+  done.length === 2 ? doneContainer.classList.add("overflow") : "";
 }
