@@ -11,8 +11,8 @@ body {
   max-width: 2000px;
   background-color: rgb(28, 28, 28);
   font-family: Josefin_Sans;
-  /* background-color: rgb(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px); */
+  overflow-y: hidden;
+  font-size: 16px;
 }
 /* header */
 header {
@@ -30,6 +30,8 @@ header {
   height: 41rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-right: auto;
+  margin-left: auto;
 }
 .doing {
   padding: 1rem;
@@ -50,10 +52,10 @@ header {
     rgba(213, 141, 240, 1) 48%,
     rgba(249, 56, 152, 1) 111.1%
   );
-  height: 8rem;
+  min-height: 10rem;
+  max-height: 29rem;
   text-align: center;
   padding: 0.6rem;
-  height: 26rem;
   border-radius: 1.2rem;
   margin-bottom: 8px;
   padding: 0.8rem;
@@ -68,17 +70,16 @@ h1 {
 }
 
 .doing-content {
-  /* background-color: rgb(251, 202, 159); */
   background-image: radial-gradient(
     circle 918px at 13.1% 25.5%,
     rgba(249, 107, 107, 1) 0%,
     rgba(247, 231, 172, 1) 48.9%,
     rgba(173, 247, 172, 1) 90%
   );
-  height: 7rem;
+  min-height: 10rem;
+  max-height: 36rem;
   text-align: center;
   padding: 0.6rem;
-  height: 37rem;
   border-radius: 1.2rem;
   margin-bottom: 8px;
   padding: 0.8rem;
@@ -92,10 +93,10 @@ h1 {
     rgba(213, 141, 240, 1) 48%,
     rgba(249, 56, 152, 1) 111.1%
   );
-  height: 8rem;
+  min-height: 10rem;
+  max-height: 20rem;
   text-align: center;
   padding: 0.6rem;
-  height: 20rem;
   border-radius: 1.2rem;
   margin-bottom: 8px;
   padding: 0.8rem;
@@ -110,9 +111,8 @@ h1 {
 .modal {
   width: 30%;
   height: 24rem;
-  z-index: 1;
+  z-index: 12;
   background-color: rgb(60, 59, 59);
-  /* background-color: rgb(250, 245, 189); */
   box-shadow: 0 20rem 5rem rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
   padding: 1rem;
@@ -121,15 +121,24 @@ h1 {
   text-align: center;
   color: aliceblue;
 }
+.overlay-hidden {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 10;
+}
 .hidden {
   display: none;
 }
 .transform {
-  position: absolute;
-  top: 12rem;
-  left: 33.5rem;
-  z-index: 2;
-  /* transform: translate(100); */
+  margin-right: auto;
+  margin-left: auto;
+  z-index: 12;
+  position: relative;
+  bottom: 35rem;
 }
 .typecard {
   font-size: 1rem;
@@ -137,7 +146,6 @@ h1 {
   margin-right: 4.5rem;
 }
 #type {
-  width: 50%;
   height: 1.5rem;
   font-size: 1rem;
   font-family: Josefin_Sans;
@@ -149,32 +157,30 @@ h1 {
   margin-right: 2rem;
 }
 .title-text {
-  font-size: 1.2rem;
   margin-right: 7rem;
 }
+.title-inputs {
+  font-size: 1.2rem;
+}
 #title-input {
-  width: 50%;
-  height: 2rem;
   font-size: 1rem;
   border-radius: 3px;
 }
+.input {
+  height: 2rem;
+  width: 50%;
+}
 .description-text {
-  font-size: 1.2rem;
   margin-right: 3rem;
 }
 #description-input {
-  width: 50%;
-  height: 2rem;
   font-size: 1rem;
   border-radius: 3px;
 }
 .dete-text {
-  font-size: 1.2rem;
   margin-right: 4.2rem;
 }
 #date-input {
-  width: 50%;
-  height: 2rem;
   font-size: 1rem;
   text-align: center;
   border-radius: 3px;
@@ -215,4 +221,207 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+@media only screen and (max-width: 600px) {
+  .todo-content {
+    max-height: 12rem;
+    overflow-x: hidden;
+  }
+  .doing-content {
+    max-height: 12rem;
+    overflow-x: hidden;
+  }
+  .done-content {
+    max-height: 12rem;
+    overflow-x: hidden;
+  }
+  h1 {
+    font-size: 1rem;
+  }
+  .close {
+    margin-right: 0.2rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .content {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal {
+    width: 60%;
+    height: 17rem;
+  }
+  .typecard {
+    font-size: 0.7em;
+    margin-right: 0.2rem;
+  }
+  .info {
+    margin: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .input {
+    height: 1.5rem;
+    width: 3.8rem;
+  }
+  .title-inputs {
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+  }
+  .title-text {
+    font-size: 1em;
+    margin-right: 2.3rem;
+  }
+  .description-text {
+    margin-right: 0.2rem;
+  }
+  .dete-text {
+    margin-right: 0.3rem;
+  }
+  .btn-create {
+    font-size: 1rem;
+    padding: 0.2rem;
+  }
+  .dis-style {
+    font-size: 0.8rem;
+  }
+  .date-style {
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+  }
+  .next {
+    font-size: 0.9rem;
+  }
+  .curt-style {
+    height: 8rem;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .modal {
+    width: 60%;
+    height: 20rem;
+  }
+  .input {
+    width: 60%;
+  }
+  .info {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .typecard {
+    margin-right: 0.5rem;
+  }
+  .title-text {
+    margin-right: 4rem;
+  }
+  .description-text {
+    margin-right: 1rem;
+  }
+  .dete-text {
+    margin-right: 0.5rem;
+  }
+  .title-inputs {
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+  }
+  .btn-create {
+    font-size: 1rem;
+  }
+  .close {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+  .dis-style {
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+  .date-style {
+    font-size: 0.65rem;
+    margin-right: 0.5rem;
+  }
+  .next {
+    font-size: 0.7rem;
+  }
+  .curt-style {
+    height: 5.5rem;
+    padding: 0.3rem;
+  }
+  h1 {
+    font-size: 0.6rem;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 1000px) {
+  .input {
+    width: 40%;
+  }
+  .modal {
+    width: 45%;
+  }
+  h1 {
+    font-size: 1rem;
+  }
+  .typecard {
+    margin-right: 3.4rem;
+  }
+  .dis-style {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+  .date-style {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .next {
+    font-size: 0.8rem;
+  }
+  .curt-style {
+    height: 5.5rem;
+    padding: 0.3rem;
+  }
+  h1 {
+    font-size: 1rem;
+  }
+}
+@media only screen and (min-width: 1001px) and (max-width: 1199px) {
+  .modal {
+    width: 45%;
+  }
+  .typecard {
+    margin-right: 3.8rem;
+  }
+  .dis-style {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .date-style {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+  }
+  .next {
+    font-size: 0.9rem;
+  }
+  .curt-style {
+    height: 5.5rem;
+    padding: 0.3rem;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .typecard {
+    margin-right: 3.4rem;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .modal {
+    height: 27rem;
+  }
+  .date-style {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
 }

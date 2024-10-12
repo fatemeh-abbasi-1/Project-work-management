@@ -12,13 +12,12 @@ const description = document.getElementById("description-input");
 const time = document.getElementById("date-input");
 const moveToDoToDoing = document.querySelector(".next");
 const closeModal = document.querySelector(".close");
+const blur = document.querySelector(".overlay");
 
-/////
 let todo = [];
 let doing = [];
 let done = [];
 
-/////////
 const html = function (arr) {
   const card = document.createElement("div");
   card.classList.add("curt-style");
@@ -43,17 +42,16 @@ const html = function (arr) {
     const next = document.createElement("a");
     next.classList.add("next");
     next.setAttribute("onclick", "moveDoing(event)");
-    next.textContent = "🔜";
+    next.textContent = "➜";
     card.append(next);
   }
   if (arr.type === "done" || arr.type === "doing") return;
   const next = document.createElement("a");
   next.classList.add("next");
   next.setAttribute("onclick", "moveToDo(event)");
-  next.textContent = "➡️";
+  next.textContent = "➜";
   card.append(next);
 };
-// console.log(html);
 //recreate h1
 const createToDo = function () {
   todoContainer.textContent = "";
@@ -77,16 +75,17 @@ const createDone = function () {
 openModal.addEventListener("click", function () {
   modal.classList.remove("hidden");
   modal.classList.add("transform");
+  blur.classList.add("overlay-hidden");
 });
 //closeModal
 closeModal.addEventListener("click", function () {
   modal.classList.add("hidden");
   modal.classList.remove("transform");
+  blur.classList.remove("overlay-hidden");
 });
 //create card
 createCardBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  console.log(type_value.value);
   if (
     (title.value === "" && description.value === "") ||
     description.value === "" ||
@@ -103,13 +102,12 @@ createCardBtn.addEventListener("click", function (e) {
       time: time.value,
       type: type_value.value,
     });
-    console.log(todo);
     todo.length === 3 ? todoContainer.classList.add("overflow") : "";
     createToDo();
-
     title.value = description.value = " ";
     todo.forEach((e, i) => html(e));
     modal.classList.add("hidden");
+    blur.classList.remove("overlay-hidden");
   }
 
   //add to doing
@@ -126,6 +124,7 @@ createCardBtn.addEventListener("click", function (e) {
     title.value = description.value = " ";
     doing.forEach((e, i) => html(e));
     modal.classList.add("hidden");
+    blur.classList.remove("overlay-hidden");
   }
   //add to done
   if (type_value.value === "done") {
@@ -135,7 +134,6 @@ createCardBtn.addEventListener("click", function (e) {
       time: time.value,
       type: type_value.value,
     });
-    console.log(done);
     done.length === 2 ? doneContainer.classList.add("overflow") : "";
     doneContainer.textContent = "";
     const h1 = document.createElement("h1");
@@ -144,6 +142,7 @@ createCardBtn.addEventListener("click", function (e) {
     title.value = description.value = " ";
     done.forEach((e, i) => html(e));
     modal.classList.add("hidden");
+    blur.classList.remove("overlay-hidden");
   }
 });
 //move from todo to doing
@@ -151,17 +150,13 @@ function moveToDo(event) {
   let getTitle = event.target
     .closest(".curt-style")
     .firstElementChild.innerHTML.slice(9);
-  console.log(getTitle);
   const getDate = event.target
     .closest(".curt-style")
     .children[2].innerHTML.slice(11);
-  console.log(getDate);
   const getDescription = event.target
     .closest(".curt-style")
     .children[1].innerHTML.slice(16);
-  console.log(getDescription);
   const findItem = todo.filter((e) => e.title !== getTitle);
-  console.log(findItem);
   todo = findItem;
   createToDo();
   findItem.forEach((e, i) => html(e));
@@ -171,9 +166,7 @@ function moveToDo(event) {
     time: getDate,
     type: "doing",
   });
-  console.log(doing);
   createDoing();
-
   doing.forEach((e, i) => html(e));
   doing.length === 4 ? doingContainer.classList.add("overflow") : "";
 }
@@ -182,17 +175,13 @@ function moveDoing(event) {
   let getTitle = event.target
     .closest(".curt-style")
     .firstElementChild.innerHTML.slice(9);
-  console.log(getTitle);
   const getDate = event.target
     .closest(".curt-style")
     .children[2].innerHTML.slice(9);
-  console.log(getDate);
   const getDescription = event.target
     .closest(".curt-style")
     .children[1].innerHTML.slice(14);
-  console.log(getDescription);
   const findItem = doing.filter((e) => e.title !== getTitle);
-  console.log(findItem);
   doing = findItem;
   createDoing();
   findItem.forEach((e, i) => html(e));
@@ -202,7 +191,6 @@ function moveDoing(event) {
     time: getDate,
     type: "done",
   });
-  // console.log(done);
   createDone();
   done.forEach((e, i) => html(e));
   done.length === 2 ? doneContainer.classList.add("overflow") : "";

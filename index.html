@@ -22,50 +22,48 @@
               <h1>To Do</h1>
             </div>
           </div>
-          <!-- <p class="name-work">➕Add card</p> -->
         </div>
         <div class="doing">
           <div class="doing-content">
             <h1>Doing</h1>
           </div>
-          <!-- <p class="name-work">➕Add card</p> -->
         </div>
         <div class="done">
           <div class="done-content">
             <h1>Done</h1>
           </div>
-          <!-- <p class="name-work">➕Add card</p> -->
         </div>
       </div>
     </main>
+    <div class="overlay"></div>
+    <div class="modal hidden">
+      <span class="close">❌</span>
+      <form action="">
+        <div class="info">
+          <label for="type" class="typecard title-inputs">Type Card</label>
+          <select name="" id="type" class="type input">
+            <option value="todo">To Do</option>
+            <option value="doing">Doing</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+
+        <div class="info">
+          <label for="title" class="title-text title-inputs">Title</label>
+          <input type="text" id="title-input" class="input" />
+        </div>
+        <div class="info">
+          <label for="description" class="description-text title-inputs"
+            >Description</label
+          >
+          <input type="text" id="description-input" class="input" required />
+        </div>
+        <div class="info">
+          <label for="date" class="dete-text title-inputs">Due-time</label>
+          <input type="date" id="date-input" required class="input" />
+        </div>
+        <input type="submit" value="create" class="btn-create" />
+      </form>
+    </div>
   </body>
 </html>
-<div class="modal hidden">
-  <span class="close">❌</span>
-  <div class="info">
-    <label for="type" class="typecard">Type Card</label>
-    <select name="" id="type" class="type">
-      <option value="todo">To Do</option>
-      <option value="doing">Doing</option>
-      <option value="done">Done</option>
-    </select>
-  </div>
-  <form action="">
-    <div class="info">
-      <label for="title" class="title-text">Title</label>
-      <input type="text" id="title-input" required />
-    </div>
-    <div class="info">
-      <label for="description" class="description-text">Description</label>
-      <input type="text" id="description-input" required />
-    </div>
-    <div class="info">
-      <label for="date" class="dete-text">Due time</label>
-      <input type="date" id="date-input" required />
-    </div>
-    <!-- <a class="btn-create">create</a> -->
-    <input type="submit" value="create" class="btn-create" />
-  </form>
-</div>
-
-<!-- </div> -->
